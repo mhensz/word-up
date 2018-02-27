@@ -242,7 +242,10 @@ $(document).ready(function() {
     // Add another event handler with a callback function.
     // When the textbox content changes,
     // update the .currentAttempt property of the model and re-render
-
+    $("#textbox").on("input", function(){
+        model.currentAttempt = $("#textbox").val();
+        render();
+    })
 
     // when the form is submitted
     $("#word-attempt-form").submit(function(evt) {
@@ -280,7 +283,13 @@ function isDisallowedLetter(letter) {
     // TODO 7
     // This should return true if the letter is not an element of
     // the .allowedLetters list in the model
-    return false;
+    if (model.allowedLetters.indexOf(letter) == -1){
+        return true;
+    }
+    else {
+        return false;
+    }
+    
 }
 
 /**
