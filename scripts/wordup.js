@@ -127,7 +127,8 @@ function render() {
 
     // clear stuff
     $("#textbox").removeClass("bad-attempt");
-    
+    $(".disallowed-letter").remove();
+    $("#textbox").attr("disabled", false);
     $("#allowed-letters").empty();
     $("#word-submissions").empty();
     // TODO 10
@@ -143,7 +144,8 @@ function render() {
 
     // TODO 11
     // Render the word submissions
-
+    let wordChips = model.wordSubmissions.map(wordSubmissionChip);
+    $("#word-submissions").append(wordChips);
 
     // Set the value of the textbox
     $("#textbox").val(model.currentAttempt);
@@ -312,7 +314,13 @@ function disallowedLettersInWord(word) {
 function containsOnlyAllowedLetters(word) {
     // TODO 12
     // Return the actual answer.
-    return true;
+    if (disallowedLettersInWord(word) != []){
+        return false;
+    }
+    else{
+        return true;
+    }
+    
 }
 
 /**
